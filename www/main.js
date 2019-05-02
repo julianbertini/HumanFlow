@@ -30,10 +30,10 @@ $(document).ready ( function() {
       });
     $( ".get_all_button" ).click(function() {
         if ($(".nav-player").attr("class").indexOf("active") > -1) {
-            getPlayerData();
+            getAboutData();
         }
         if ($(".nav-match").attr("class").indexOf("active") > -1) {
-            getMatchData();
+            getMapsData();
         } 
         if ($(".nav-tourney").attr("class").indexOf("active") > -1) {
             getTourneyData();
@@ -213,13 +213,13 @@ initializeNavigationEventHandlers = function () {
         event.preventDefault();
         $(".nav-item").removeClass("active");
         $(".nav-match").addClass("active");
-        getMatchData();
+        getMapsData();
     })
     $(".get-player-data").click(function (event) {
         event.preventDefault();
         $(".nav-item").removeClass("active");
         $(".nav-player").addClass("active");
-        getPlayerData();
+        getAboutData();
     })
     $(".get-tourney-data").click(function (event) {
         event.preventDefault();
@@ -248,19 +248,19 @@ getTourneyData = function () {
     });
 }
 
-getMatchData = function () {
+getMapsData = function () {
 
     // disable custom search button
     $(".search_button").prop("disabled", true);
 
     console.log("Getting match data...");
-    var search_url = "matches_table.php"
+    var search_url = "stacked_bar.html"
     $.ajax({
         url: search_url,
         context: document.body
       }).done(function(data) {
           console.log(data)
-        $("#data-table").html(data); // remember to call event hanlders again after reloading html
+        $("#page-container").html(data); // remember to call event hanlders again after reloading html
         resetCustomValues();
         updateCustomValues();
         sortPlayerColumns();
@@ -268,18 +268,18 @@ getMatchData = function () {
     });
 }
 
-getPlayerData = function () {
+getAboutData = function () {
 
     // enable custom search button
     $(".search_button").prop("disabled", false);
 
-    console.log("Getting player data...");
-    var search_url = "player_table.php"
+    console.log("Getting about data...");
+    var search_url = "about.php"
     $.ajax({
         url: search_url,
         context: document.body
       }).done(function(data) {
-        $("#data-table").html(data); // remember to call event hanlders again after reloading html
+        $("#page-container").html(data); // remember to call event hanlders again after reloading html
         resetCustomValues();
         updateCustomValues();
         sortPlayerColumns();

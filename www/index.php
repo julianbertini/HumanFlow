@@ -7,6 +7,8 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+    <script src="//d3js.org/d3.v4.min.js"></script>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
@@ -21,14 +23,14 @@
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col">
-                <input class="btn btn-outline-info search_button" type="submit" value="Custom Search">
-                <input class="btn btn-outline-primary get_all_button" type="submit" value="Get First 100 Entries">
+                <!-- <input class="btn btn-outline-info search_button" type="submit" value="Custom Search">
+                <input class="btn btn-outline-primary get_all_button" type="submit" value="Get First 100 Entries"> -->
             </div>
         </div>
         <div class="row justify-content-md-center">
-            <div class="col-md-auto">
+            <div id="page-container" class="col-md-auto">
                 <?php
-                    include ("stacked_bar.html"); // navigation bar
+                    include ("about.php"); // navigation bar
                 ?>
             </div>
         </div>
