@@ -21,20 +21,19 @@
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col">
-                <!-- <input class="btn btn-outline-info search_button" type="submit" value="Custom Search">
-                <input class="btn btn-outline-primary get_all_button" type="submit" value="Get First 100 Entries"> -->
+                <input class="btn btn-outline-info search_button" type="submit" value="Custom Search">
+                <input class="btn btn-outline-primary get_all_button" type="submit" value="Get First 100 Entries">
             </div>
         </div>
         <div class="row justify-content-md-center">
             <div class="col-md-auto">
                 <?php
-                    include ("about.php"); // navigation bar
+                    include ("stacked_bar.html"); // navigation bar
                 ?>
             </div>
         </div>
     </div>
     <?php
-        
     ?>
 </body>
 </html>
