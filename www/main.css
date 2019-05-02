@@ -1,0 +1,24 @@
+.filter_button {
+    width: 100%;
+    margin-top: 10px;
+}
+.search_button {
+    width: 30%;
+    float: right;
+    margin: 10px;
+}
+.get_all_button {
+    width: 30%;
+    float: right;
+    margin: 10px;
+}
+
+.table {
+    height: 700px;
+}
+.data-pagination {
+    float: right;
+}
+.jumbotron {
+    margin-top: 100px;
+}
