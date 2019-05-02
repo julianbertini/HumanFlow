@@ -21,24 +21,20 @@
     <div class="container">
         <div class="row justify-content-md-center">
             <div class="col">
-                <input class="btn btn-outline-info search_button" type="submit" value="Custom Search">
-                <input class="btn btn-outline-primary get_all_button" type="submit" value="Get First 100 Entries">
+                <!-- <input class="btn btn-outline-info search_button" type="submit" value="Custom Search">
+                <input class="btn btn-outline-primary get_all_button" type="submit" value="Get First 100 Entries"> -->
             </div>
         </div>
         <div class="row justify-content-md-center">
             <div class="col-md-auto">
                 <?php
-                    include ("player_table.php"); // navigation bar
+                    include ("about.php"); // navigation bar
                 ?>
             </div>
         </div>
     </div>
     <?php
-        require 'vendor/autoload.php'; // include composer's autoloader
-        $conn = new MongoDB\Client('mongodb://localhost');
-        $db = $conn->tennis;
-        $collection = $db->tourneys;
-        $tourns = $collection->find();
+        
     ?>
 </body>
 </html>
