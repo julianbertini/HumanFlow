@@ -254,7 +254,7 @@ getMapsData = function () {
     $(".search_button").prop("disabled", true);
 
     console.log("Getting match data...");
-    var search_url = "stacked_bar.html"
+    var search_url = "histogram.html"
     $.ajax({
         url: search_url,
         context: document.body

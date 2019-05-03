@@ -8,7 +8,7 @@ var margin = {top: 10, right: 30, bottom: 30, left: 30},
     height = 500 - margin.top - margin.bottom;
 
 var x = d3.scaleTime()
-    .domain([new Date(2015, 0, 1), new Date(2016, 0, 1)])
+    .domain([new Date(2019, 0, 0), new Date(2019, 0, 1)])
     .rangeRound([0, width]);
 
 var y = d3.scaleLinear()
@@ -24,7 +24,7 @@ d3.select("svg").remove(); // remove old graph when reload
 var svg = d3.select("#page-container").append("svg")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
-  .append("g")
+    .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 svg.append("g")
@@ -41,7 +41,7 @@ d3.csv("homicides.csv", type, function(error, data) {
 
   var bar = svg.selectAll(".bar")
       .data(bins)
-    .enter().append("g")
+      .enter().append("g")
       .attr("class", "bar")
       .attr("transform", function(d) { return "translate(" + x(d.x0) + "," + y(d.length) + ")"; });
 

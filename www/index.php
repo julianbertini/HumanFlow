@@ -7,11 +7,11 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <script src="//d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v5.js"></script>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Human Flow</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <script src="main.js"></script>
     <link rel="stylesheet" type="text/css" media="screen" href="main.css">
@@ -30,7 +30,7 @@
         <div class="row justify-content-md-center">
             <div id="page-container" class="col-md-auto">
                 <?php
-                    include ("about.php"); // navigation bar
+                    include ("stacked_bars.html"); // navigation bar
                 ?>
             </div>
         </div>

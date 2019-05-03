@@ -1,0 +1,127 @@
+<script>
+    
+  var n = 5 // number of series
+  var m = 58 // number of values per series
+  var height = 500
+  var margin = {top: 10, right: 30, bottom: 30, left: 30},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+
+  var xz = d3.range(m) // the x-values shared by all series
+
+  var yz = d3.range(n).map(() => bumps(m)); // the y-values of each of the n series
+
+  var y01z = d3.stack()
+    .keys(d3.range(n))
+  (d3.transpose(yz)) // stacked yz
+  .map((data, i) => data.map(([y0, y1]) => [y0, y1, i]));
+
+  var yMax = d3.max(yz, y => d3.max(y));
+
+  var y1Max = d3.max(y01z, y => d3.max(y, d => d[1]));
+
+
+  var x = d3.scaleBand()
+    .domain(xz)
+    .rangeRound([margin.left, width - margin.right])
+    .padding(0.08);
+
+    console.log(x(1));
+
+  var y = d3.scaleLinear()
+    .domain([0, y1Max])
+    .range([height - margin.bottom, margin.top]);
+
+  var z = d3.scaleSequential(d3.interpolateMagma)
+    .domain([-0.5 * n, 1.5 * n]);
+
+
+  var xAxis = svg => svg.append("g")
+    .attr("transform", `translate(0,${height - margin.bottom})`)
+    .call(d3.axisBottom(x).tickSizeOuter(0).tickFormat(() => ""));
+
+  // Returns an array of m psuedorandom, smoothly-varying non-negative numbers.
+// Inspired by Lee Byron’s test data generator.
+// http://leebyron.com/streamgraph/
+function bumps(m) {
+  const values = [];
+
+  // Initialize with uniform random values in [0.1, 0.2).
+  for (let i = 0; i < m; ++i) {
+    values[i] = 0.1 + 0.1 * Math.random();
+  }
+
+  // Add five random bumps.
+  for (let j = 0; j < 5; ++j) {
+    const x = 1 / (0.1 + Math.random());
+    const y = 2 * Math.random() - 0.5;
+    const z = 10 / (0.1 + Math.random());
+    for (let i = 0; i < m; i++) {
+      const w = (i / m - y) * z;
+      values[i] += x * Math.exp(-w * w);
+    }
+  }
+
+  // Ensure all values are positive.
+  for (let i = 0; i < m; ++i) {
+    values[i] = Math.max(0, values[i]);
+  }
+
+  return values;
+}
+    
+  var svg = d3.select("#page-container").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+
+var chart =  {
+
+    rect : svg.selectAll("g")
+    .data(y01z)
+    .enter().append("g")
+      .attr("fill", (d, i) =>  z(i))
+    .selectAll("rect")
+    .data(d => d)
+    .join("rect")
+      .attr("x", (d, i) => {console.log(i);return x(i)} )
+      .attr("y", 100)
+      .attr("width", x.bandwidth())
+      .attr("height", 100),
+
+  transitionGrouped: function() {
+    svg.append("g")
+      .call(xAxis);
+
+    console.log(x(1) + "!!!!!");
+    y.domain([0, yMax]);
+
+    this.rect.transition()
+        .duration(500)
+        .delay((d, i) => i * 20)
+        .attr("x", (d, i) => x(i) + x.bandwidth() / n * d[2])
+        .attr("width", x.bandwidth() / n)
+      .transition()
+        .attr("y", d => y(d[1] - d[0]))
+        .attr("height", d => y(0) - y(d[1] - d[0]));
+  },
+
+  transitionStacked: function() {
+    y.domain([0, y1Max]);
+
+    this.rect.transition()
+        .duration(500)
+        .delay((d, i) => i * 20)
+        .attr("y", d => y(d[1]))
+        .attr("height", d => y(d[0]) - y(d[1]))
+      .transition()
+        .attr("x", (d, i) => x(i))
+        .attr("width", x.bandwidth());
+  }
+}
+
+chart.transitionStacked();
+</script>
