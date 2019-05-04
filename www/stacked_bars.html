@@ -92,12 +92,11 @@ var chart =  {
       .attr("width", x.bandwidth())
       .attr("height", 100),
 
-  transitionGrouped: function() {
+  transitionStacked: function() {
+    y.domain([0, yMax]);
+
     svg.append("g")
       .call(xAxis);
-
-    console.log(x(1) + "!!!!!");
-    y.domain([0, yMax]);
 
     this.rect.transition()
         .duration(500)
@@ -109,9 +108,11 @@ var chart =  {
         .attr("height", d => y(0) - y(d[1] - d[0]));
   },
 
-  transitionStacked: function() {
+  transitionGrouped: function() {
     y.domain([0, y1Max]);
 
+    // I think the transition order here makes it update all y values of rect groups, then x values,
+    // that's why animation goes vertical first then horizontal
     this.rect.transition()
         .duration(500)
         .delay((d, i) => i * 20)
@@ -123,5 +124,5 @@ var chart =  {
   }
 }
 
-chart.transitionStacked();
+chart.transitionGrouped();
 </script>

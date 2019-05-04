@@ -1,0 +1,44 @@
+<script>
+var data = [{"age":"Below 6 years","population":511},
+            {"age":"6 yrs & Above – Below 12 yrs","population":394},
+            {"age":"12 yrs & Above –Below 16 yrs","population":429},
+            {"age":"16 yrs & Above – Below 18 yrs","population":568},
+            {"age":"18 yrs & Above – Below 30 yrs","population":13117},          
+			{"age":"30 yrs & Above – Below 45 yrs","population":13094},
+            {"age":"45 yrs & Above – Below 60 yrs","population":5225},
+            {"age":"60 yrs & Above","population":1116}];
+
+var margin = {top: 10, right: 30, bottom: 30, left: 30},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom,
+    radius = Math.min(width-100,height-100)/2;
+
+var color = d3.scaleOrdinal()
+    .domain(data.map(d => d.population))
+    .range(d3.quantize(t => d3.interpolateSpectral(t * 0.8 + 0.1), data.length).reverse())
+
+arc = d3.arc()
+    .innerRadius(0)
+    .outerRadius(Math.min(width, height) / 2 - 1)
+    .cornerRadius(100)
+
+var pie = d3.pie()
+          .value(function(d){return d.population;})
+          .padAngle(0.04);
+
+var svg = d3.select("#page-container").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+
+var g = svg.append("g")
+           .attr("transform", `translate(${width / 2},${height / 2})`);
+
+    g.selectAll(".path")
+        .data(pie(data))
+        .enter().append("path")
+		    .style("fill", d => color(d.data.population))
+		    .attr("d", arc);
+        
+console.log(pie(data));
+
+</script>
