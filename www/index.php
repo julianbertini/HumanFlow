@@ -30,7 +30,7 @@
         <div class="row justify-content-md-center">
             <div id="page-container" class="col-md-auto">
                 <?php
-                    include ("platelet.html"); // navigation bar
+                    include ("get_map_data.php"); // navigation bar
                 ?>
             </div>
         </div>
