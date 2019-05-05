@@ -25,12 +25,20 @@
 
 
 
-
 .bar rect {
     fill: steelblue;
   }
   
-  .bar text {
+.bar text {
     fill: #fff;
     font: 10px sans-serif;
-  }
+}
+
+.legend {
+    margin: 20px;
+    padding: 10px;
+}
+.map-row {
+    height: 800px;
+    margin-top: 20px;
+}
