@@ -7,27 +7,30 @@ if ($mysqli->connect_errno) {
 
 $response = array();
 $hourlyValues = array();
+$filename = "results.json";
 
-$res = $mysqli->query("SELECT location.building as building, MONTH(from_unixtime(time_stamp)) as month, DAY(from_unixtime(time_stamp)) as day, HOUR(from_unixtime(time_stamp)) as hour,
-                        count(MAC_hash) as counter FROM probes, location where location.id = probes.loc_id group by building, month, day, hour;");
-for ($row_no = 0; $row_no < $res->num_rows - 1; $row_no++) {
-    $res->data_seek($row_no);
-    $row = $res->fetch_assoc();
+if (!file_exists($filename)) {
+    $res = $mysqli->query("SELECT MONTH(from_unixtime(time_stamp)) as month, DAY(from_unixtime(time_stamp)) as day, HOUR(from_unixtime(time_stamp)) as hour, location.building as building,
+    count(MAC_hash) as counter FROM probes, location where location.id = probes.loc_id group by  month, day, hour, building;");
+    for ($row_no = 0; $row_no < $res->num_rows - 1; $row_no++) {
+        $res->data_seek($row_no);
+        $row = $res->fetch_assoc();
 
-    $count = $row['counter'];
-    $day = $row['day'];
-    $hour = $row['hour'];
-    $building = $row['building'];
-    $month = $row['month'];
+        $count = $row['counter'];
+        $day = $row['day'];
+        $hour = $row['hour'];
+        $building = $row['building'];
+        $month = $row['month'];
 
-    $hourlyValues[] = array('building' => $building, 'month' => $month, 'day' => $day, 'hour' => $hour, 'count' => $count);
+        $hourlyValues[] = array('building' => $building, 'month' => $month, 'day' => $day, 'hour' => $hour, 'count' => $count);
+    }
+
+    $response["hourlyValues"] = $hourlyValues;
+
+    $fp = fopen('results.json', 'w');
+    fwrite($fp, json_encode($response));
+    fclose($fp);
 }
-
-$response["houryValues"] = $hourlyValues;
-
-$fp = fopen('results.json', 'w');
-fwrite($fp, json_encode($response));
-fclose($fp);
 
 readfile("results.json");
 

@@ -30,7 +30,7 @@
         <div class="row justify-content-md-center">
             <div id="page-container" class="col-md-auto">
                 <?php
-                    include ("get_map_data.php"); // navigation bar
+                    include ("stacked_bars.html"); // navigation bar
                 ?>
             </div>
         </div>
