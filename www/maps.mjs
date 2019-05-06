@@ -44,7 +44,7 @@ var parseForHourly = (day, month, results) => {
               buildings[2][i_l] = +row.count;
               i_l++;
           } 
-          else if ("WALL".localeCompare(row.building) == 0) {
+          else if ("Wall".localeCompare(row.building) == 0) {
               buildings[3][i_w] = +row.count;
               i_w++;
           } 
@@ -62,7 +62,7 @@ var parseForHourly = (day, month, results) => {
 }
 
 var renderMaps = () => {
-  console.log("Getting results for stacked...");
+  console.log("Getting results for maps...");
   var search_url = "get_count_results.php"
   $.ajax({
       url: search_url,
@@ -79,7 +79,7 @@ var renderMaps = () => {
 
 var displayGroupedStacked =  (results) => {
   
-        var day = 24, month = 4,
+        var day = 21, month = 4,
             buildings = parseForHourly(day,month,results);
 
         var n = 4 // number of series

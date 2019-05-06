@@ -80,6 +80,10 @@
 
 .about-section-p {
     padding: 20px;
+    text-align: left;
+}
+.about-p-col {
+    text-align: center;
 }
 
 #about-section1 {
