@@ -72,13 +72,14 @@ var renderMaps = () => {
         results = JSON.parse(data);
         displayGroupedStacked(results);
         displayPlateletMap(results);
+        displayMovementGraph(results);
     });
 }
 
 
 var displayGroupedStacked =  (results) => {
   
-        var day = 27, month = 4,
+        var day = 24, month = 4,
             buildings = parseForHourly(day,month,results);
 
         var n = 4 // number of series
@@ -269,6 +270,129 @@ window.setInterval( () => {
     change(data)
   }
 }, 750);
+
+}
+
+var displayMovementGraph = (results) => {
+
+var graph = {
+  "nodes": [
+    {"name": "Chambers", "id": 1},
+    {"name": "Union", "id": 2},
+    {"name": "Libs", "id": 3},
+    {"name": "Wall", "id": 4},
+    {"name": "Chambers2", "id": 1},
+    {"name": "Union2", "id": 2},
+    {"name": "Libs2", "id": 3},
+    {"name": "Wall2", "id": 4}
+  ],
+  "links": [
+    {"source": "Chambers2", "target": "Union", "time": 1},
+    {"source": "Union", "target": "Libs", "time": 2},
+    {"source": "Libs", "target": "Wall", "time": 3},
+    {"source": "Chambers", "target": "Libs2", "time": 4},
+    {"source": "Chambers", "target": "Union2", "time": 5},
+    {"source": "Libs", "target": "Union", "time": 6},
+    {"source": "Wall2", "target": "Union", "time": 7},
+    {"source": "Chambers2", "target": "Libs2", "time": 8}
+  ]
+};
+
+
+  chart = () => {
+    const links = graph.links.map(d => Object.create(d));
+    const nodes = graph.nodes.map(d => Object.create(d));
+
+    var svg = d3.select('#movement-map').append('svg')
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+
+    const simulation = d3.forceSimulation(nodes)
+        .force("link", d3.forceLink(links).id(d => d.name).distance((width + margin.left + margin.right)/3.5))
+        .force("charge", d3.forceManyBody())
+        .force("center", d3.forceCenter((width + margin.left + margin.right) / 2, (height + margin.top + margin.bottom) / 2));
+
+    const link = svg.append("g")
+        .attr("stroke", "#999")
+        .attr("stroke-opacity", 0.6)
+      .selectAll("line")
+      .data(links)
+      .join("line")
+        .attr("stroke", d => linkColor(d.time))
+        .attr("stroke-width", d => Math.sqrt(d.time));
+
+
+    const node = svg.append("g")
+        .attr("stroke", "#fff")
+        .attr("stroke-width", 1.5)
+      .selectAll("circle")
+      .data(nodes)
+      .join("circle")
+        .attr("r", 10)
+        .attr("fill", d => nodeColor(d.id-1))
+        .call(drag(simulation));
+
+    node.append("title")
+        .text(d => d.id);
+
+    simulation.on("tick", () => {
+      link
+          .attr("x1", d => d.source.x)
+          .attr("y1", d => d.source.y)
+          .attr("x2", d => d.target.x)
+          .attr("y2", d => d.target.y);
+
+      node
+          .attr("cx", d => d.x)
+          .attr("cy", d => d.y);
+    });
+
+    // to indicate what color each building belongs to
+    d3.select("#movement-legend")
+      .selectAll("div")
+      .data(legends)
+    .enter().append("div")
+      .style("width", (d) => d.length*10 + "px")
+      .style("background-color", (d, i) => nodeColor(i))
+      .text((d) => d)
+      .style("color", "#f8f9fa")
+      .style("text-align", "center");
+
+    return svg.node();
+  }
+
+  var nodeColor = d3.scaleSequential(d3.interpolateBrBG)
+          .domain([-0.1 * 4, 1.5 * 4]);
+
+  var linkColor = d3.scaleSequential(d3.interpolateGreys)
+  .domain([-0.5 * 8, 2 * 8]);
+
+  drag = simulation => {
+    
+    function dragstarted(d) {
+      if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+      d.fx = d.x;
+      d.fy = d.y;
+    }
+    
+    function dragged(d) {
+      d.fx = d3.event.x;
+      d.fy = d3.event.y;
+    }
+    
+    function dragended(d) {
+      if (!d3.event.active) simulation.alphaTarget(0);
+      d.fx = null;
+      d.fy = null;
+    }
+    
+    return d3.drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended);
+  }
+
+  chart();
 
 }
 

@@ -2,12 +2,23 @@
 <button onclick="change(data2)">Data 2</button>
 <script>
 
-  console.log("Getting results for platelet...");
-  var search_url = "get_count_results.php"
-  $.ajax({
-      url: search_url,
-      context: document.body
-    }).done(function(data) {
+  var data = [{"age":"Below 6 years","population":511},
+              {"age":"6 yrs & Above – Below 12 yrs","population":394},
+              {"age":"12 yrs & Above –Below 16 yrs","population":429},
+              {"age":"16 yrs & Above – Below 18 yrs","population":568},
+              {"age":"18 yrs & Above – Below 30 yrs","population":13117},          
+              {"age":"30 yrs & Above – Below 45 yrs","population":13094},
+              {"age":"45 yrs & Above – Below 60 yrs","population":5225},
+              {"age":"60 yrs & Above","population":1116}];
+
+  var data2 = [{"age":"Below 6 years","population":1000},
+              {"age":"6 yrs & Above – Below 12 yrs","population":32},
+              {"age":"12 yrs & Above –Below 16 yrs","population":34},
+              {"age":"16 yrs & Above – Below 18 yrs","population":304},
+              {"age":"18 yrs & Above – Below 30 yrs","population":3000},          
+              {"age":"30 yrs & Above – Below 45 yrs","population":40000},
+              {"age":"45 yrs & Above – Below 60 yrs","population":400},
+              {"age":"60 yrs & Above","population":1116}];
 
   var margin = {top: 10, right: 30, bottom: 30, left: 30},
       width = 960 - margin.left - margin.right,

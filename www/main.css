@@ -40,5 +40,28 @@
 }
 .map-row {
     height: 800px;
-    margin-top: 20px;
+}
+.map-transition {
+    height: 600px;
+    margin: auto;
+    
+}
+.map-title {
+    padding: 10px;
+}
+.grouped-stacked-map-subtitle {
+    margin-left: 63px;
+}
+.platelet-map-subtitle {
+    margin-left: 45px;
+}
+
+.movement-map-subtitle1 {
+    margin-left: 105px;
+}
+.movement-map-subtitle2 {
+    margin-left: 263px;
+}
+.movement-map-subtitle3 {
+    margin-left: 275px;
 }

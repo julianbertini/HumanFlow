@@ -1,11 +1,36 @@
 <script src="maps.mjs" ></script>
 <div class="container">
+        <div class="map-title row justify-content-md-center">
+                <h1>Comparing Population Density Throughout the Day</h1>
+                <h4 class="grouped-stacked-map-subtitle">The x-axis represents hour of the day; the y-axis is a normalized, relative scale</h4>
+        </div>
         <div class="map-row row justify-content-md-center" id="grouped-stacked-map">
             <div class = "legend" id = "grouped-stacked-legend"></div>
         </div>
 
-        
+        <div class="map-transition row justify-content-md-center">
+            <h1 class="justify-content-md-center">The next visualization is an animation <br> that brings to life the flow of people <br> between different buildings throughout the day ...</h1>
+        </div>
+
+        <div class="map-title row justify-content-md-center">
+                <h1>Animating Movement Throughout the Day</h1>
+                <h4 class="platelet-map-subtitle">Each platelet pedal represent a building; it's size, relative density</h4>
+        </div>
         <div class="map-row row justify-content-md-center" id="platelet-map">
             <div class = "legend" id = "platelet-legend"></div>    
+        </div>
+
+        <div class="map-transition row justify-content-md-center">
+                <h1 class="justify-content-md-center">Now, let's take a look at the movement <br> of a single person between buildings <br> and at different times ...</h1>
+        </div>
+
+        <div class="map-title row justify-content-md-center">
+                <h1>Visualizing Paths Taken Between Buildings</h1>
+                <h4 class="movement-map-subtitle1">A node represents a building; an edge represents movement</h4>
+                <h5 class="movement-map-subtitle2">The stroke width and shade of an edge represent time</h3>
+                <h6 class="movement-map-subtitle3">The thicker the stroke and darker the edge, the later in the day</h2>
+        </div>
+        <div class="map-row row justify-content-md-center" id="movement-map">
+            <div class = "legend" id = "movement-legend"></div>    
         </div>
     </div>
