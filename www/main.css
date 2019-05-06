@@ -20,7 +20,9 @@
     float: right;
 }
 .jumbotron {
-    margin-top: 100px;
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
 }
 
 
@@ -64,4 +66,32 @@
 }
 .movement-map-subtitle3 {
     margin-left: 275px;
+}
+
+.about-row {
+    margin-bottom: 500px;
+    border-radius: 20px;
+}
+
+.about-title {
+    padding: 10px;
+    text-align: right;
+}
+
+.about-section-p {
+    padding: 20px;
+}
+
+#about-section1 {
+    background-color: #f8f9fa;
+}
+#about-section2 {
+    background-color: #f8f9fa;
+}
+#about-section3 {
+    background-color: #f8f9fa;
+}
+.about-img {
+    border-radius: 20px;
+    margin-bottom: 10px;
 }

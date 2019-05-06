@@ -1,17 +1,77 @@
 <div class="container">
-        <div class="row justify-content-md-center">
+        <div class="about-row row justify-content-md-center">
 
           <div class="jumbotron">
               <h1 class="display-4">Hello, human!</h1>
               <p class="lead">This is a project about human flow at Davidson College.</p>
               <hr class="my-4">
-              <p>If you want to learn more about this project and motivation:</p>
-              <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+              <img src="ny_walking.JPG" class="about-img img-fluid" alt="Responsive image">
+              <p>Learn more about the story of this project:</p>
+              <a class="about-learn-more-btn btn btn-dark btn-lg" href="#" role="button">Let's go!</a>
           </div>
 
         </div>
         
-        <div class="row justify-content-md-center">
- 
+
+        <div class="about-title one row justify-content-md-center">
+                <h1>Getting the Data: Using Raspberry Pi's To Capture Probe Requests on the Network</h1>
+        </div>
+        <div id="about-section1" class="about-row row justify-content-md-center">
+          <div class="col-md-auto">
+          <figure class="figure">
+            <img src="pi_in_union.jpeg" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption">A Raspberry Pi, below the desk, in the Union.</figcaption>
+          </figure>    
+          </div>
+          <div class="col-lg-7">
+            <p class="about-section-p">
+              sdfkjsandkjfl naskjdfnjk lasdnfjk lasdnf jklasndf kjlsadfn jklasdnf jkasdnfkasdnf jkasdnf jksadfn kjsad
+              sdfkjsandkjfl naskjdfnjk lasdnfjk lasdnf jklasndf kjlsadfn jklasdnf jkasdnfkasdnf jkasdnf jksadfn kjsad
+              sdfkjsandkjfl naskjdfnjk lasdnfjk lasdnf jklasndf kjlsadfn jklasdnf jkasdnfkasdnf jkasdnf jksadfn kjsad
+              sdfkjsandkjfl naskjdfnjk lasdnfjk lasdnf jklasndf kjlsadfn jklasdnf jkasdnfkasdnf jkasdnf jksadfn kjsad
+            </p>
+          </div>
+        </div>
+
+
+
+        <div class="about-title two row justify-content-md-center">
+                <h1>Storing the Data: Processing and Parsing the Wireless Probe Requests</h1>
+        </div>
+        <div id="about-section2" class="about-row row justify-content-md-center">
+          <div class="col-md-auto">
+          <figure class="figure">
+            <img src="pi_in_union.jpeg" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption">A Raspberry Pi, below the desk, in the Union.</figcaption>
+          </figure>    
+          </div>
+          <div class="col-lg-7">
+            <p class="about-section-p">
+              sdfkjsandkjfl naskjdfnjk lasdnfjk lasdnf jklasndf kjlsadfn jklasdnf jkasdnfkasdnf jkasdnf jksadfn kjsad
+              sdfkjsandkjfl naskjdfnjk lasdnfjk lasdnf jklasndf kjlsadfn jklasdnf jkasdnfkasdnf jkasdnf jksadfn kjsad
+              sdfkjsandkjfl naskjdfnjk lasdnfjk lasdnf jklasndf kjlsadfn jklasdnf jkasdnfkasdnf jkasdnf jksadfn kjsad
+              sdfkjsandkjfl naskjdfnjk lasdnfjk lasdnf jklasndf kjlsadfn jklasdnf jkasdnfkasdnf jkasdnf jksadfn kjsad
+            </p>
+          </div>
+        </div>
+
+        <div class="about-title three row justify-content-md-center">
+                <h1>Visualizing the Data: Seeking to Understand the Data and Make Meaningful Representations</h1>
+        </div>
+        <div id="about-section3" class="about-row row justify-content-md-center">
+          <div class="col-md-auto">
+          <figure class="figure">
+            <img src="pi_in_union.jpeg" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption">A Raspberry Pi, below the desk, in the Union.</figcaption>
+          </figure>    
+          </div>
+          <div class="col-lg-7">
+            <p class="about-section-p">
+              sdfkjsandkjfl naskjdfnjk lasdnfjk lasdnf jklasndf kjlsadfn jklasdnf jkasdnfkasdnf jkasdnf jksadfn kjsad
+              sdfkjsandkjfl naskjdfnjk lasdnfjk lasdnf jklasndf kjlsadfn jklasdnf jkasdnfkasdnf jkasdnf jksadfn kjsad
+              sdfkjsandkjfl naskjdfnjk lasdnfjk lasdnf jklasndf kjlsadfn jklasdnf jkasdnfkasdnf jkasdnf jksadfn kjsad
+              sdfkjsandkjfl naskjdfnjk lasdnfjk lasdnf jklasndf kjlsadfn jklasdnf jkasdnfkasdnf jkasdnf jksadfn kjsad
+            </p>
+          </div>
         </div>
 </div>
