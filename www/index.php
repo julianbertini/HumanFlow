@@ -30,7 +30,7 @@
         <div class="row justify-content-md-center">
             <div id="page-container" class="col-md-auto">
                 <?php
-                    include ("about.php"); // navigation bar
+                    include ("about.html"); // navigation bar
                 ?>
             </div>
         </div>
