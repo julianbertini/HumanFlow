@@ -32,7 +32,7 @@ $(document).ready ( function() {
         if ($(".nav-player").attr("class").indexOf("active") > -1) {
             getAboutData();
         }
-        if ($(".nav-match").attr("class").indexOf("active") > -1) {
+        if ($(".nav-map").attr("class").indexOf("active") > -1) {
             getMapsData();
         } 
         if ($(".nav-tourney").attr("class").indexOf("active") > -1) {
@@ -209,10 +209,10 @@ getCustomData = function () {
 }
 
 initializeNavigationEventHandlers = function () {
-    $(".get-match-data").click(function (event) {
+    $(".get-maps-data").click(function (event) {
         event.preventDefault();
         $(".nav-item").removeClass("active");
-        $(".nav-match").addClass("active");
+        $(".nav-map").addClass("active");
         getMapsData();
     })
     $(".get-player-data").click(function (event) {
@@ -253,8 +253,8 @@ getMapsData = function () {
     // disable custom search button
     $(".search_button").prop("disabled", true);
 
-    console.log("Getting match data...");
-    var search_url = "histogram.html"
+    console.log("Getting map data...");
+    var search_url = "maps.html"
     $.ajax({
         url: search_url,
         context: document.body
