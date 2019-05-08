@@ -2,9 +2,20 @@ var margin = {top: 10, right: 30, bottom: 30, left: 30},
     width = 960 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
+var GroupedStackedDate = {
+  day: 20,
+  month: 4
+}
+var PlateletDate = {
+  day: 20,
+  month: 4,
+  hour: 0
+}
+
 var legends = ["Chambers", "Union", "Libs", "Wall"];
 
 var parseForHourly = (day, month, results) => {
+
 
   // counts for each hour of a day
   var chambersCountsPerHour = new Array(24).fill(0),
@@ -17,6 +28,14 @@ var parseForHourly = (day, month, results) => {
   buildings[1] = unionCountsPerHour;
   buildings[2] = libsCountsPerHour;
   buildings[3] = wallCountsPerHour;
+
+  if (month < 4 || month > 5) {
+    return buildings; 
+  }
+
+  if (day > 30 || day < 1) {
+    return buildings;
+  }
 
   // there is an erroneous data value at index 0; not sure why
   var i = 1;
@@ -61,6 +80,13 @@ var parseForHourly = (day, month, results) => {
 
 }
 
+var setInitialInputValues = () => {
+  $(".grouped-stacked-day-input").val(GroupedStackedDate.day);
+  $(".grouped-stacked-month-input").val(GroupedStackedDate.month);
+  $(".platelet-day-input").val(PlateletDate.day);
+  $(".platelet-month-input").val(PlateletDate.month);
+}
+
 var renderMaps = () => {
   console.log("Getting results for maps...");
   var search_url = "get_count_results.php"
@@ -70,8 +96,12 @@ var renderMaps = () => {
     }).done(function(data) {
         console.log("done fetching results...")
         results = JSON.parse(data);
+        setInitialInputValues();
         displayGroupedStacked(results);
         displayPlateletMap(results);
+        updateGroupedStackedDate();
+        updatePlateletDate();
+        resetPlateletFields();
     });
 }
 var renderMovementMap = () => {
@@ -87,11 +117,67 @@ var renderMovementMap = () => {
     });
 }
 
+var updateGroupedStackedDate = () => {
+
+  $(".grouped-stacked-day-input").keypress( (event) => {
+    var key = event.which;
+    var value = $(".grouped-stacked-day-input").val();
+    if (value.localeCompare("")) {
+      if (key == 13) { // enter key code
+        GroupedStackedDate.day = value
+        $("#grouped-stacked-map-svg").remove();
+        displayGroupedStacked(results);
+      }
+    }
+    
+  });
+
+  $(".grouped-stacked-month-input").keypress( (event) => {
+    var key = event.which;
+    var value = $(".grouped-stacked-month-input").val();
+    if (value.localeCompare("")) {
+      if (key == 13) { // enter key code
+        GroupedStackedDate.month = value
+        $("#grouped-stacked-map-svg").remove();
+        displayGroupedStacked(results);
+      }
+    }
+  });
+
+}
+
+var updatePlateletDate = () => {
+
+  $(".platelet-day-input").keypress( (event) => {
+    var key = event.which;
+    var value = $(".platelet-day-input").val();
+    if (value.localeCompare("")) {
+      if (key == 13) { // enter key code
+        PlateletDate.day = value
+        $("#platelet-map-svg").remove();
+        displayPlateletMap(results);
+      }
+    }
+    
+  });
+
+  $(".platelet-month-input").keypress( (event) => {
+    var key = event.which;
+    var value = $(".platelet-month-input").val();
+    if (value.localeCompare("")) {
+      if (key == 13) { // enter key code
+        PlateletDate.month = value
+        $("#platelet-map-svg").remove();
+        displayPlateletMap(results);
+      }
+    }
+  });
+
+}
+
 
 var displayGroupedStacked =  (results) => {
-  
-        var day = 25, month = 4,
-            buildings = parseForHourly(day,month,results);
+        var buildings = parseForHourly(GroupedStackedDate.day,GroupedStackedDate.month,results);
 
         var n = 4 // number of series
         var m = 24 // number of values per series
@@ -120,6 +206,7 @@ var displayGroupedStacked =  (results) => {
           .domain([-0.5 * n, 1.5 * n]);
 
         var svg = d3.select("#grouped-stacked-map").append("svg")
+                    .attr("id", "grouped-stacked-map-svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
                     .append("g")
@@ -192,11 +279,19 @@ var displayGroupedStacked =  (results) => {
         chart.transitionGrouped();
 }
 
+var resetPlateletFields = () => {
+    $(".reset-platelet").click((event) => {
+      event.preventDefault();
+      if (PlateletDate.hour >= 24) {
+        $(".platelet-day-input").prop("disabled", false);
+        $(".platelet-month-input").prop("disabled", false);
+      }
+    })
+}
 
 var displayPlateletMap = (results) => {
-
-  var day = 22, month = 4,
-      buildings = parseForHourly(day,month,results);
+  PlateletDate.hour = 0;    
+  var buildings = parseForHourly(PlateletDate.day,PlateletDate.month,results);
 
   var data = [{"population":buildings[0][1]},
               {"population":buildings[1][1]},
@@ -218,6 +313,7 @@ var arc = d3.arc()
             .cornerRadius(100)
   
 var g = d3.select("#platelet-map").append("svg")
+          .attr("id", "platelet-map-svg")
           .attr("width", width + margin.left + margin.right)
           .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -254,6 +350,25 @@ var change = (newData) => {
       path = path.data(pie(newData)); // compute the new angles
       path.transition().duration(750).attrTween("d", arcTween); // redraw the arcs
 }
+
+$(".platelet-day-input").prop("disabled", true);
+$(".platelet-month-input").prop("disabled", true);
+
+window.setInterval( () => {
+
+  if (buildings[0].length <= 0) {
+    clearInterval();
+  } else {
+    data = [{"population":buildings[0].shift()},
+                {"population":buildings[1].shift()},
+                {"population":buildings[2].shift()},
+                {"population":buildings[3].shift()}];
+    
+    change(data)             
+    PlateletDate.hour++;
+    $(".platelet-hour-input").val(PlateletDate.hour + " hr(s)");
+  }
+}, 750);
   
 
 // Store the displayed angles in _current.
@@ -266,18 +381,6 @@ function arcTween(a) {
     return arc(i(t));
   };
 }
-
-window.setInterval( () => {
-  if (buildings[0].length <= 0) {
-    clearInterval();
-  } else {
-    data = [{"population":buildings[0].shift()},
-                {"population":buildings[1].shift()},
-                {"population":buildings[2].shift()},
-                {"population":buildings[3].shift()}];
-    change(data)
-  }
-}, 750);
 
 }
 

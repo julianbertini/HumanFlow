@@ -37,8 +37,8 @@
 }
 
 .legend {
-    margin: 20px;
-    padding: 10px;
+    margin: 0px;
+    padding: 15px;
 }
 .map-row {
     height: 800px;
@@ -51,6 +51,10 @@
 .map-title {
     padding: 10px;
 }
+.map-play-button-row {
+    padding: 15px;
+}
+
 .grouped-stacked-map-subtitle {
     margin-left: 63px;
 }
@@ -120,4 +124,13 @@ thead {
 
 .summary-stat-input {
     text-align: center;
+}
+
+.map-input {
+    width: 100%;
+    text-align: center;
+}
+
+.reset-platelet {
+    padding: 15px;
 }

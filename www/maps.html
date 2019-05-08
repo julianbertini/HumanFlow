@@ -4,8 +4,23 @@
                 <h1>Comparing Population Density Throughout the Day</h1>
                 <h4 class="grouped-stacked-map-subtitle">The x-axis represents hour of the day; the y-axis is a normalized, relative scale</h4>
         </div>
-        <div class="map-row row justify-content-md-center" id="grouped-stacked-map">
-            <div class = "legend" id = "grouped-stacked-legend"></div>
+
+        <div class="row justify-content-md">
+                <div class = "legend" id = "grouped-stacked-legend"></div>
+        </div>        
+        <div class="row justify-content-md">
+                <div class="col-md-auto">
+                        <label for="">Day</label>
+                        <input class="form-control map-input grouped-stacked-day-input" type="text" value="" placeholder="Day">         
+                </div>
+                <div class="col-md-auto">
+                        <label for="">Month</label>
+                        <input class="form-control map-input grouped-stacked-month-input" type="text" value="" placeholder="Month">         
+                </div>
+                
+        </div>        
+        
+        <div class="map-row row justify-content-md-center" id="grouped-stacked-map">            
         </div>
 
         <div class="map-transition row justify-content-md-center">
@@ -16,9 +31,31 @@
                 <h1>Animating Movement Throughout the Day</h1>
                 <h4 class="platelet-map-subtitle">Each platelet pedal represent a building; it's size, relative density</h4>
         </div>
-        <div class="map-row row justify-content-md-center" id="platelet-map">
-            <div class = "legend" id = "platelet-legend"></div>    
+
+
+        <div class="row justify-content-md">
+                <div class = "legend" id = "platelet-legend"></div>    
         </div>
+        <div class="row justify-content-md">
+                <div class="col-md-auto">
+                        <label for="">Day</label>
+                        <input class="form-control map-input platelet-day-input" type="text" value="" placeholder="Day">         
+                </div>
+                <div class="col-md-auto">
+                        <label for="">Month</label>
+                        <input class="form-control map-input platelet-month-input" type="text" value="" placeholder="Month">         
+                </div>   
+                <div class="col-md-auto">
+                        <label for="">Hour</label>
+                        <input class="form-control map-input platelet-hour-input" disabled="true" type="text" value="" placeholder="Hour">         
+                </div>   
+        </div>
+        <div class="reset-platelet row justify-content-md">
+                <a class="reset-platelet-btn btn btn-dark btn-lg" href="#" role="button">Reset</a>
+        </div>  
+        <div class="map-row row justify-content-md-center" id="platelet-map">
+            
+        </div> 
 
         <div class="map-transition row justify-content-md-center">
                 <h1 class="justify-content-md-center">Now, let's take a look at the movement <br> of a single person between buildings, <br> at different times ...</h1>

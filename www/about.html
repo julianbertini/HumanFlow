@@ -31,9 +31,9 @@
           <div class="about-p-col col-lg-7">
             <p class="about-section-p">
               To setup this project, we first picked locations around campus and found relatively obscure spots near entrances with 
-              outlets where we could place our wifi devices that would be high traffic enough to collect meaningful data.  Our devices
-              were Raspberry Pis plugged into the wall running a wifi capturing script to receive wifi probe data.  Lucky for us, most
-              of the time students and college staff did not move or unplug our setups.  The devices ran consistently throughout the time 
+              outlets where we could place our Raspberry Pi devices. We hoped these spots would be high traffic enough to collect meaningful data. Our devices
+              were plugged into the wall running a sniffing script to intercept random wifi probe data. Lucky for us, most
+              of the time (not all of the time) students and college staff did not move or unplug our setups. The devices ran consistently throughout the time 
               we tested, and provided interesting insights into the flow of students on campus.
             </p>
             <a class="about-section1-more-btn btn btn-dark btn-lg" href="#" role="button">Next Section</a>
@@ -54,12 +54,14 @@
             </div>
           <div class="about-p-col col-lg-7">
             <p class="about-section-p">
-              After collecting the data for the day the devices then sent the information to our centralized database server located
-              on campus using another script. On the server we parsed the data python and taking advantage of various computer science
+              After collecting the data for the day, the devices sent information to our centralized database server located
+              on campus. On the server we parsed the data using python, taking advantage of various computer science
               techniques including block chunking, parallel processing and shared memory objects with locks. From some brief analysis 
-              of developing the parser we were able to increase our processing time by 4x - 6x.  Using our initial parser schema with
+              of developing the parser we were able to increase our processing time by 4x - 6x.  
+              <br><br>
+              Using our initial parser schema with
               a basic for loop to process 80,000 lines took 24 seconds. With multiple processes we were able to drop the time down to
-              14 seconds. Then by breaking up the file into 8 different pieces and then running them in parallel on the 8 multiprocessors 
+              14 seconds. Then, by breaking up the file into 8 different pieces and then running them in parallel on the 8 multiprocessors 
               we were able to drop the time down to 7 seconds! 8,700 lines a second for 17 million lines meant that we were able to 
               parse our database in 30 minutes rather than 1 hour and 20 minutes. Huge help for dealing with bugs and checking the data. 
             </p>
@@ -79,10 +81,12 @@
           </div>
           <div class="about-p-col col-lg-7">
             <p class="about-section-p">
-              When the data has been collected and parsed in our MySQL database, our website is setup to query the database with
-              MySQL queries which are called by php. visualize the data in different ways, which the user can select from the interface. 
+              When the data was collected and parsed in our MySQL database, our website was ready to query the database with
+              SQL queries using PHP. We visualize the data in different ways, which the user can select from the interface. 
               The bar chart graph is great as it displays the number of probes in each building for each day, giving an overall view
-              of which buildings are more popular and when each is most popular.  All in all, we have collected 17 million wifi probe
+              of which buildings are more popular and when each is most popular.  
+              <br><br>
+              All in all, we have collected 17 million wifi probe
               requests since April 18th to May 6th. The location that had the most probe requests was the Library, with 6 million
               probe requests.  
             </p>
