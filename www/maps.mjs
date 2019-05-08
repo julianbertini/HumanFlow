@@ -72,14 +72,25 @@ var renderMaps = () => {
         results = JSON.parse(data);
         displayGroupedStacked(results);
         displayPlateletMap(results);
-        displayMovementGraph(results);
+    });
+}
+var renderMovementMap = () => {
+  console.log("Getting results for movement map...");
+  var search_url = "get_movement_results.php"
+  $.ajax({
+      url: search_url,
+      context: document.body
+    }).done(function(data) {
+        console.log("done fetching results...")
+        results = JSON.parse(data);
+        displayMovementMap(results);
     });
 }
 
 
 var displayGroupedStacked =  (results) => {
   
-        var day = 21, month = 4,
+        var day = 25, month = 4,
             buildings = parseForHourly(day,month,results);
 
         var n = 4 // number of series
@@ -184,7 +195,7 @@ var displayGroupedStacked =  (results) => {
 
 var displayPlateletMap = (results) => {
 
-  var day = 27, month = 4,
+  var day = 22, month = 4,
       buildings = parseForHourly(day,month,results);
 
   var data = [{"population":buildings[0][1]},
@@ -224,8 +235,6 @@ var path = g.datum(data).selectAll("path")
             arcs.forEach( (d) => {
               var c = arc.centroid(d);
               centers.push(c)
-              console.log(d);
-              console.log(c)
             });
 
         // to indicate what color each building belongs to
@@ -241,7 +250,7 @@ var path = g.datum(data).selectAll("path")
             
   
 var change = (newData) => {
-      console.log("changin..")
+      // console.log("changin..")
       path = path.data(pie(newData)); // compute the new angles
       path.transition().duration(750).attrTween("d", arcTween); // redraw the arcs
 }
@@ -262,7 +271,6 @@ window.setInterval( () => {
   if (buildings[0].length <= 0) {
     clearInterval();
   } else {
-    console.log("changing...")
     data = [{"population":buildings[0].shift()},
                 {"population":buildings[1].shift()},
                 {"population":buildings[2].shift()},
@@ -273,7 +281,9 @@ window.setInterval( () => {
 
 }
 
-var displayMovementGraph = (results) => {
+var displayMovementMap = (results) => {
+
+  console.log(results)
 
 var graph = {
   "nodes": [
@@ -397,3 +407,4 @@ var graph = {
 }
 
 renderMaps();
+renderMovementMap();
