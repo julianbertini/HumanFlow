@@ -280,7 +280,7 @@ var displayGroupedStacked =  (results) => {
 }
 
 var resetPlateletFields = () => {
-    $(".reset-platelet").click((event) => {
+    $(".reset-platelet-btn").click((event) => {
       event.preventDefault();
       if (PlateletDate.hour >= 24) {
         $(".platelet-day-input").prop("disabled", false);
@@ -386,7 +386,12 @@ function arcTween(a) {
 
 var displayMovementMap = (results) => {
 
-  console.log(results)
+  console.log(results.hourlyValues)
+
+  // for (var i = 0; i < results.hourlyValues.length; i++) {
+  //   if ()
+  //   graph.nodes[i] = {"name": results.hourlyValues[i].building}
+  // }
 
 var graph = {
   "nodes": [
